@@ -19,13 +19,14 @@ from saveToSql import sqloperater
 
 
 class productSniffer():
- 
+   
+    # initiate the default configuration
     def __init__(self, base_url, page_url):
         super().__init__()
         self.base_url = base_url
         self.page_url = page_url
         
-       
+    # parse the product detail page
     def getproductdetail(self, page_url, num_retries=3):
         IP = productSniffer.get_proxy_ip()
         user_agent = productSniffer.get_user_agent()
@@ -206,7 +207,7 @@ class productSniffer():
     def error(self):
         pass
     
-# this spider here below 
+# test 
 base_url = 'https://www.aliexpress.com'
 page_url = 'https://www.aliexpress.com/category/528/batteries/7.html?g=n' 
 profinder = productSniffer(base_url, page_url)
