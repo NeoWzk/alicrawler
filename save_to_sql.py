@@ -16,7 +16,8 @@ class sqloperater:
         super().__init__()
         self.sqlstr = sqlstr
         self.status = ''
-
+        
+    # drop existed table
     def drop_table(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -33,7 +34,7 @@ class sqloperater:
         except Exception as e:
             self.status = 'Failed to drop Table', str(e)
 
-
+    # create new table
     def create_table(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -50,7 +51,7 @@ class sqloperater:
         except Exception as e:
             self.status = 'Failed to Create Table', str(e)
             
-            
+    # add data to table       
     def AddData(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -70,7 +71,7 @@ class sqloperater:
         finally:
             connection.close()
         
-    
+    # bulk-action for adding data to table
     def AddManyData(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -90,7 +91,7 @@ class sqloperater:
         finally:
             connection.close()
             
-    
+    # update data in the table
     def updateData(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -109,6 +110,7 @@ class sqloperater:
         finally:
             connection.close()
     
+    # delete data from the table
     def deleteData(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -127,7 +129,7 @@ class sqloperater:
         finally:
             connection.close()
     
-    
+    # read data from table
     def fetchOneData(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -147,6 +149,8 @@ class sqloperater:
         finally:
             connection.close()
             
+            
+    # read all data from table    
     def fetchAllData(self, sqlstr):
         connection = pymysql.connect(host=config.HOST,
                                      user=config.USER,
@@ -166,13 +170,15 @@ class sqloperater:
         finally:
             connection.close()
             
-        
+    # retrun execution status    
     def get_status(self):
         return self.status
     
+    # return data
     def get_data(self):
         return self.sqldata
     
+    # read and save data to a file 
     def sql_to_set(self, sqlstr):
         sqlreader = sqloperater(sqlstr)
         sqlreader.fetchAllData(sqlstr)
